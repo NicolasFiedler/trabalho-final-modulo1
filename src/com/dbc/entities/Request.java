@@ -1,18 +1,18 @@
 package com.dbc.entities;
 
+import com.dbc.interfaces.Crud;
+
 import java.util.ArrayList;
 
 public class Request {
+
     private Integer id;
     private User owner;
     private BankAccount bankAccount;
-    private String title, descripition;
+//    private Categories category;
+    private String title, description;
     private Double goal, reachedValue;
-    private ArrayList<Donate> donateList;
+    private ArrayList<Donate> donatesList;
 
-    private static ArrayList<Request> requestsDB;
-
-    public static void printaRequest () {
-
-    }
+    public static ArrayList<Request> requestsDB = new ArrayList<>();
 }
