@@ -11,10 +11,10 @@ public abstract class User implements Crud {
     private ArrayList<Request> myRequestsList;
 
     private static ArrayList<User> userDB = new ArrayList<>();
-    private static Integer count++;
+    private static Integer count = 0;
 
     public User(){}
-    public User(String name, String email) throws Exception {
+    public User(String name, String email) {
 
         this.setName(name);
         this.setEmail(email);
@@ -30,16 +30,12 @@ public abstract class User implements Crud {
         this.myRequestsList = myRequestsList;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
-        if (idCheckIfNotExist(id)) {
-            this.id = id;
-        } else {
-
-        }
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -64,14 +60,5 @@ public abstract class User implements Crud {
 
     public static ArrayList<User> getUserDB() {
         return userDB;
-    }
-
-    public Boolean idCheckIfNotExist (String id) {
-        for (User user : getUserDB()) {
-            if(user.getId().equalsIgnoreCase(id)){
-                return false;
-            }
-        }
-        return true;
     }
 }
