@@ -12,5 +12,4 @@ public enum Categories {
     SONHOS,
     POBREZA;
 
-
 }

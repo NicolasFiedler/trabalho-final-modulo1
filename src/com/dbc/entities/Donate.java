@@ -6,7 +6,6 @@ public class Donate {
     private String nameDonator;
     private String cpfDonator;
     private String emailDonator;
-    private Request request;
     private Double donateValue;
     private String description, accoutInformation;
 
@@ -14,48 +13,42 @@ public class Donate {
 
     }
 
-    public Donate(String nameDonator, String cpfDonator, String emailDonator, Request request, Double donateValue, String descripition, String accoutInformation){
+    public Donate(String nameDonator, String cpfDonator, String emailDonator, Double donateValue, String descripition, String accoutInformation){
         this.setNameDonator(nameDonator);
         this.setCpfDonator(cpfDonator);
         this.setEmailDonator(emailDonator);
-        this.setRequest(request);
         this.setDonateValue(donateValue);
         this.setDescription(descripition);
         this.setAccoutInformation(accoutInformation);
     }
 
     public Boolean createDonate() {
-       Donate donate = new Donate();
+
        Scanner scanner = new Scanner(System.in);
        Integer id= scanner.nextInt();
        scanner.nextLine();
 
 
-       //TODO VERIFICAR ISSO COM O LUCAS
-      donate.setRequest(donate.getRequest().getRequestById(id));
-
-
         String payStatus = scanner.nextLine();
 
-        if (BankAccount.simulatePayment(payStatus) || donate.getRequest()!=null) {
+        if (BankAccount.simulatePayment(payStatus)) {
 
-            donate.setNameDonator(scanner.nextLine());
-            donate.setCpfDonator(scanner.nextLine());
-            donate.setEmailDonator(scanner.nextLine());
-            donate.setDonateValue(scanner.nextDouble());
+            this.setNameDonator(scanner.nextLine());
+            this.setCpfDonator(scanner.nextLine());
+            this.setEmailDonator(scanner.nextLine());
+            this.setDonateValue(scanner.nextDouble());
             scanner.nextLine();
-            donate.setAccoutInformation(scanner.nextLine());
+            this.setAccoutInformation(scanner.nextLine());
             String description = scanner.nextLine();
 
             if (description.equalsIgnoreCase("sim")) {
-                donate.setDescription(scanner.nextLine());
+                this.setDescription(scanner.nextLine());
             } else {
-                donate.setDescription(null);
+                this.setDescription(null);
             }
-            donate.setAccoutInformation(scanner.nextLine());
-
-            donate.getRequest().addNewDonate(donate);
-
+            Request request=new Request().getRequestById(id);
+            request.addNewDonate(this);
+            this.setAccoutInformation(scanner.nextLine());
             return true;
         }
         return false;
@@ -87,14 +80,6 @@ public class Donate {
 
     public void setEmailDonator(String emailDonator) {
         this.emailDonator = emailDonator;
-    }
-
-    public Request getRequest() {
-        return request;
-    }
-
-    public void setRequest(Request request) {
-        this.request = request;
     }
 
     public Double getDonateValue() {
