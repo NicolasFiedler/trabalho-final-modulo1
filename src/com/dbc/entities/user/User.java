@@ -3,6 +3,7 @@ package com.dbc.entities.user;
 import com.dbc.entities.Request;
 import com.dbc.interfaces.Crud;
 
+import javax.sound.midi.Soundbank;
 import java.util.ArrayList;
 
 public abstract class User implements Crud {
@@ -15,7 +16,7 @@ public abstract class User implements Crud {
 
     public User(){}
     public User(String name, String email) {
-
+        this.setId(count++);
         this.setName(name);
         this.setEmail(email);
         userDB.add(this);
@@ -60,5 +61,32 @@ public abstract class User implements Crud {
 
     public static ArrayList<User> getUserDB() {
         return userDB;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", myRequestsList=" + myRequestsList +
+                '}';
+    }
+
+    public static void userListPrint (){
+        for (User user :
+                getUserDB()) {
+            System.out.println(user);
+        }
+    }
+
+    public static User getUserById (Integer id) {
+        for (User user :
+                getUserDB()) {
+            if (user.getId().equals(id)){
+                return user;
+            }
+        }
+        return null;
     }
 }
