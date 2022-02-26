@@ -11,7 +11,7 @@ public abstract class User implements Crud {
     private ArrayList<Request> myRequestsList;
 
     private static ArrayList<User> userDB = new ArrayList<>();
-    private static Integer count;
+    private static Integer count++;
 
     public User(){}
     public User(String name, String email) throws Exception {
