@@ -1,5 +1,7 @@
 package com.dbc.entities;
 
+import com.dbc.enums.Categories;
+
 import java.util.ArrayList;
 
 public class Request {
