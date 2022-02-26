@@ -1,5 +1,7 @@
 package com.dbc.entities;
 
+import com.dbc.entities.user.User;
+
 import java.util.ArrayList;
 
 public class Request {
