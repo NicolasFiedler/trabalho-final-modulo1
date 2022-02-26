@@ -32,7 +32,7 @@ public class Request {
         } finally {
             requestsDB.add(this);
         }
-
+        //redundante. tu pode usar sem o finelly
         requestsDB.add(this);
     }
 
