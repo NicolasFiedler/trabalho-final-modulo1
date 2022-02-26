@@ -9,7 +9,8 @@ public class Request {
     private BankAccount bankAccount;
     private Categories category;
     private String title, description;
-    private Double goal, reachedValue;
+    private Double goal;
+    private Double reachedValue;
     private ArrayList<Donate> donatesList;
 
     public static ArrayList<Request> requestsDB = new ArrayList<>();
@@ -117,8 +118,9 @@ public class Request {
         return false;
     }
 
+//  TODO - listar pelos valores menores
     public static void getAllRequests() {
-        requestsDB.stream().forEach(System.out::println);
+
     }
 
     // TODO - tratar caso retorne nulo.
