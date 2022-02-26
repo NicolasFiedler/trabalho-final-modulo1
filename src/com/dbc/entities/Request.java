@@ -15,24 +15,19 @@ public class Request {
     public static ArrayList<Request> requestsDB = new ArrayList<>();
     public static Integer idCount = 0;
 
+    public Request() {}
+
     public Request(User owner, BankAccount bankAccount, Categories category, String title, String description, Double goal) {
-        try {
-            this.setId(++idCount);
-            this.setOwner(owner);
-            this.setBankAccount(bankAccount);
-            this.setCategory(category);
-            this.setTitle(title);
-            this.setDescription(description);
-            this.setGoal(goal);
-            this.reachedValue = 0.0;
-            this.donatesList = new ArrayList<Donate>();
-        } catch (NullPointerException e) {
-            System.out.println("Algum dado está faltando.");
-            System.out.println(e.getMessage());
-        } finally {
-            requestsDB.add(this);
-        }
-        //redundante. tu pode usar sem o finelly
+        this.setId(++idCount);
+        this.setOwner(owner);
+        this.setBankAccount(bankAccount);
+        this.setCategory(category);
+        this.setTitle(title);
+        this.setDescription(description);
+        this.goal = goal;
+        this.reachedValue = 0.0;
+        this.donatesList = new ArrayList<Donate>();
+
         requestsDB.add(this);
     }
 
@@ -43,7 +38,7 @@ public class Request {
     public void setId(Integer id) {
         Integer finalId = id;
         boolean idExists = requestsDB.stream()
-                .map(request -> request.getId())
+                .map(Request::getId)
                 .anyMatch(r -> r.equals(finalId));
 
         if (!idExists) {
@@ -101,15 +96,56 @@ public class Request {
         return goal;
     }
 
-    public void setGoal(Double goal) {
-        this.goal = goal;
-    }
-
     public Double getReachedValue() {
         return reachedValue;
     }
 
+    public void setReachedValue(Double value) {
+        this.reachedValue += value;
+    }
+
     public ArrayList<Donate> getDonatesList() {
         return donatesList;
+    }
+
+    public boolean setNewDonate(Donate donate) {
+        Double value = donate.getDonateValue();
+        if (value > 0) {
+            this.setReachedValue(value);
+            return true;
+        }
+        return false;
+    }
+
+    public static void getAllRequests() {
+        requestsDB.stream().forEach(System.out::println);
+    }
+
+    // TODO - tratar caso retorne nulo.
+    public Request getRequestById(Integer id) {
+        Request request = requestsDB.stream()
+                .filter(r -> r.getId() == id)
+                .findFirst()
+                .orElse(null);
+        return request;
+    }
+
+    public boolean addNewDonate(Donate donate) {
+        if (donate != null) {
+            this.setNewDonate(donate);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return this.getId() + " - " +
+                this.getTitle() + "\n-- Valor: " +
+                this.getReachedValue() + "/" +
+                this.getGoal() + "\nDescrição: " +
+                this.getDescription() + "\nUsuário: " +
+                this.getOwner().getName();
+
     }
 }
