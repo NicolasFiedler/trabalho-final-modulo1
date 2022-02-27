@@ -3,6 +3,8 @@ package com.dbc.entities;
 
 import com.dbc.entities.user.User;
 import com.dbc.enums.Categories;
+import jdk.jfr.Category;
+
 import java.util.ArrayList;
 
 public class Request {
@@ -15,6 +17,8 @@ public class Request {
     private Double goal;
     private Double reachedValue;
     private ArrayList<Donate> donatesList;
+
+    private ArrayList<Request> closedDonatesList;
 
     public static ArrayList<Request> requestsDB = new ArrayList<>();
     public static Integer idCount = 0;
@@ -30,7 +34,8 @@ public class Request {
         this.setDescription(description);
         this.goal = goal;
         this.reachedValue = 0.0;
-        this.donatesList = new ArrayList<Donate>();
+        this.donatesList = new ArrayList<>();
+        this.closedDonatesList = new ArrayList<>();
 
         requestsDB.add(this);
     }
@@ -114,6 +119,12 @@ public class Request {
 
     public boolean setNewDonate(Donate donate) {
         Double value = donate.getDonateValue();
+
+        if (this.checkIfGoalHasReached()) {
+            this.closeOrder();
+            return false;
+        }
+
         if (value > 0) {
             this.setReachedValue(value);
             return true;
@@ -121,9 +132,26 @@ public class Request {
         return false;
     }
 
-//  TODO - listar pelos valores menores
     public static void getAllRequests() {
+       requestsDB.stream().forEach(System.out::println);
+    }
 
+    public static void getRequestsByCategory(Categories category) {
+        requestsDB.stream()
+                .filter(request -> request.getCategory() == category)
+                .forEach(System.out::println);
+    }
+
+    public boolean checkIfGoalHasReached() {
+        if (this.getReachedValue() >= this.getGoal()) {
+            return true;
+        }
+        return false;
+    }
+
+    public void closeOrder() {
+        this.closedDonatesList.add(this);
+        requestsDB.remove(this.getId());
     }
 
     // TODO - tratar caso retorne nulo.
