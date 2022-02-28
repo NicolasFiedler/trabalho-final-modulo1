@@ -1,5 +1,7 @@
 package com.dbc.entities.user;
 
+import java.util.Scanner;
+
 public class Institution extends User {
     private String cnpj;
 
@@ -32,8 +34,41 @@ public class Institution extends User {
     }
 
     @Override
-    public void updateUser(Integer id) {
+    public Boolean updateUser(Integer id) {
+        Institution institution = userToInstitution(id);
+        if (institution != null) {
+            clear();
+            Scanner scanner = new Scanner(System.in);
+            String name, email, cnpj;
 
+            System.out.printf("Trocar nome de usuario: ");
+            name = scanner.nextLine();
+            System.out.printf("Trocar email: ");
+            email = scanner.nextLine();
+            System.out.printf("Trocar cnpj: ");
+            cnpj = scanner.nextLine();
+            if (!cnpj.equals("")){
+                for (User user :
+                        User.getUserDB()) {
+                    if (user instanceof Institution) {
+                        Institution institution2 = (Institution) user;
+                        if (institution2.getCnpj().equalsIgnoreCase(cnpj)){
+                            return false;
+                        }
+                    }
+                }
+            }
+
+            if (!name.equals("")){
+                institution.setName(name);
+            }
+            if (!email.equals("")){
+                institution.setEmail(email);
+            }
+            institution.setCnpj(cnpj);
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -41,11 +76,8 @@ public class Institution extends User {
         for (User user : User.getUserDB()) {
             if (user.getId().equals(id)){
                 User.getUserDB().remove(user);
-                if (!deleteUser(id)) {
-                    return true;
-                }
+                return true;
             }
-
         }
         return false;
     }
@@ -59,5 +91,11 @@ public class Institution extends User {
                 ", myRequestsList=" + getMyRequestsList() +
                 "cnpj='" + getCnpj() + '\'' +
                 '}';
+    }
+
+    public void clear() {
+        for (int i = 0; i < 50; i++) {
+            System.out.println();
+        }
     }
 }

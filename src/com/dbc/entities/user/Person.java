@@ -1,5 +1,7 @@
 package com.dbc.entities.user;
 
+import java.util.Scanner;
+
 public class Person extends User {
     private String cpf;
 
@@ -33,8 +35,41 @@ public class Person extends User {
     }
 
     @Override
-    public void updateUser(Integer id) {
+    public Boolean updateUser(Integer id) {
+        Person person = userToPerson(id);
+        if (person != null) {
+            clear();
+            Scanner scanner = new Scanner(System.in);
+            String name, email, cpf;
 
+            System.out.printf("Trocar nome de usuario: ");
+            name = scanner.nextLine();
+            System.out.printf("Trocar email: ");
+            email = scanner.nextLine();
+            System.out.printf("Trocar cpf: ");
+            cpf = scanner.nextLine();
+            if (!cpf.equals("")){
+                for (User user :
+                        User.getUserDB()) {
+                    if (user instanceof Institution) {
+                        Institution institution2 = (Institution) user;
+                        if (institution2.getCnpj().equalsIgnoreCase(cpf)){
+                            return false;
+                        }
+                    }
+                }
+            }
+
+            if (!name.equals("")){
+                person.setName(name);
+            }
+            if (!email.equals("")){
+                person.setEmail(email);
+            }
+            person.setCpf(cpf);
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -59,5 +94,11 @@ public class Person extends User {
                 ", myRequestsList=" + getMyRequestsList() +
                 "cpf='" + getCpf() + '\'' +
                 '}';
+    }
+
+    public void clear() {
+        for (int i = 0; i < 50; i++) {
+            System.out.println();
+        }
     }
 }

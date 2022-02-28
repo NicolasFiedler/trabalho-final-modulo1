@@ -79,8 +79,7 @@ public abstract class User implements Crud {
     }
 
     public static User getUserById (Integer id) {
-        for (User user :
-                getUserDB()) {
+        for (User user : getUserDB()) {
             if (user.getId().equals(id)){
                 return user;
             }
@@ -88,18 +87,17 @@ public abstract class User implements Crud {
         return null;
     }
 
-    public static User getUserByKey (String id) {
-
-        return null;
-    }
-
-    public Boolean isPersonOrInstitution (Integer id) {
-        if (getUserById(id) instanceof Person){
-            return true;
-        } else if (getUserById(id) instanceof Institution) {
-            return false;
+    public Institution userToInstitution (Integer id) {
+        if (getUserById(id) instanceof Institution) {
+            return (Institution) getUserById(id);
         }
         return null;
     }
 
+    public Person userToPerson(Integer id) {
+        if (getUserById(id) instanceof Institution) {
+            return (Person) getUserById(id);
+        }
+        return null;
+    }
 }
