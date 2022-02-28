@@ -4,6 +4,8 @@ import com.dbc.entities.user.Person;
 import com.dbc.entities.user.User;
 import org.junit.Test;
 
+import static org.junit.Assert.*;
+
 public class UserTest {
     @Test
     public void testarUsuario (){
@@ -15,6 +17,7 @@ public class UserTest {
             Person person1 = (Person) user;
             System.out.println(person1.getCpf());
         }
+        assertTrue(true);
     }
 
 }

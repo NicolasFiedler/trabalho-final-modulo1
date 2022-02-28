@@ -2,8 +2,6 @@ package com.dbc.entities.user;
 
 import com.dbc.entities.Request;
 import com.dbc.interfaces.Crud;
-
-import javax.sound.midi.Soundbank;
 import java.util.ArrayList;
 
 public abstract class User implements Crud {
@@ -89,4 +87,19 @@ public abstract class User implements Crud {
         }
         return null;
     }
+
+    public static User getUserByKey (String id) {
+
+        return null;
+    }
+
+    public Boolean isPersonOrInstitution (Integer id) {
+        if (getUserById(id) instanceof Person){
+            return true;
+        } else if (getUserById(id) instanceof Institution) {
+            return false;
+        }
+        return null;
+    }
+
 }
