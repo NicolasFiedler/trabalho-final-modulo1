@@ -63,15 +63,23 @@ public abstract class User implements Crud {
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", myRequestsList=" + myRequestsList +
-                '}';
+        if (getUserById(this.getId()) instanceof Person){
+           return userToPerson(this.getId()).toString();
+
+        } else if (getUserById(this.getId()) instanceof Institution) {
+            return userToInstitution(this.getId()).toString();
+
+        } else {
+            return "User{" +
+                    "id=" + id +
+                    ", name='" + name + '\'' +
+                    ", email='" + email + '\'' +
+                    ", myRequestsList=" + myRequestsList +
+                    '}';
+        }
     }
 
-    public static void userListPrint (){
+    public static void listPrint (){
         for (User user :
                 getUserDB()) {
             System.out.println(user);

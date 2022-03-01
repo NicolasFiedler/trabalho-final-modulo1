@@ -73,14 +73,10 @@ public class Person extends User {
     }
 
     @Override
-    public Boolean deleteUser(Integer id) {
-        for (User user : User.getUserDB()) {
-            if (user.getId().equals(id)){
-                User.getUserDB().remove(user);
-                if (!deleteUser(id)) {
-                    return true;
-                }
-            }
+    public Boolean deleteUser() {
+        if (this != null) {
+            User.getUserDB().remove(this);
+            return true;
         }
         return false;
     }
@@ -92,7 +88,7 @@ public class Person extends User {
                 ", name='" + getName() + '\'' +
                 ", email='" + getEmail() + '\'' +
                 ", myRequestsList=" + getMyRequestsList() +
-                "cpf='" + getCpf() + '\'' +
+                ", cpf='" + getCpf() + '\'' +
                 '}';
     }
 

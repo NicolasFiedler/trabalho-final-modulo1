@@ -8,10 +8,10 @@ import static org.junit.Assert.*;
 
 public class UserTest {
     @Test
-    public void testarUsuario (){
+    public void testUsuario (){
         //setup
         Person person = new Person("nome", "email", "cpf");
-        User.userListPrint();
+        User.listPrint();
 
         //action
         User user = User.getUserById(0);

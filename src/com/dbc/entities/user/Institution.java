@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class Institution extends User {
     private String cnpj;
 
+    public Institution() {}
     public Institution(String name, String email, String cnpj)  {
         super(name, email);
         this.setCnpj(cnpj);
@@ -20,8 +21,7 @@ public class Institution extends User {
 
     @Override
     public Boolean createUser(String name, String email, String cnpj) {
-        for (User user :
-                User.getUserDB()) {
+        for (User user : User.getUserDB()) {
             if (user instanceof Institution) {
                 Institution institution = (Institution) user;
                 if (institution.getCnpj().equalsIgnoreCase(cnpj)){
@@ -29,7 +29,7 @@ public class Institution extends User {
                 }
             }
         }
-        new Person (name, email, cnpj);
+        new Institution (name, email, cnpj);
         return true;
     }
 
@@ -72,12 +72,10 @@ public class Institution extends User {
     }
 
     @Override
-    public Boolean deleteUser(Integer id) {
-        for (User user : User.getUserDB()) {
-            if (user.getId().equals(id)){
-                User.getUserDB().remove(user);
-                return true;
-            }
+    public Boolean deleteUser() {
+        if (this != null) {
+            User.getUserDB().remove(this);
+            return true;
         }
         return false;
     }
@@ -89,7 +87,7 @@ public class Institution extends User {
                 ", name='" + getName() + '\'' +
                 ", email='" + getEmail() + '\'' +
                 ", myRequestsList=" + getMyRequestsList() +
-                "cnpj='" + getCnpj() + '\'' +
+                ", cnpj='" + getCnpj() + '\'' +
                 '}';
     }
 
