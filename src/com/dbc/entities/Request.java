@@ -33,7 +33,7 @@ public class Request {
     public Request() {}
 
     public Request(User owner, BankAccount bankAccount, Categories category, String title, String description, Double goal) {
-        this.setId(++idCount);
+        this.setId(idCount++);
         this.setOwner(owner);
         this.setBankAccount(bankAccount);
         this.setCategory(category);
@@ -209,6 +209,6 @@ public class Request {
                 this.getReachedValue() + "/" +
                 this.getGoal() + "\nDescrição: " +
                 this.getDescription() + "\nUsuário: " +
-                this.getOwner().getName();
+                this.getOwner();
     }
 }
