@@ -1,5 +1,4 @@
 package com.dbc.entities;
-
 import java.util.Scanner;
 
 public class Donate {
@@ -48,7 +47,6 @@ public class Donate {
             }
             Request request=new Request().getRequestById(id);
             request.addNewDonate(this);
-            this.setAccoutInformation(scanner.nextLine());
             return true;
         }
         return false;
