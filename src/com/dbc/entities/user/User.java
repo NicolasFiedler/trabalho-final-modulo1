@@ -82,7 +82,7 @@ public abstract class User implements Crud {
     public static void listPrint (){
         for (User user :
                 getUserDB()) {
-            System.out.println(user);
+            System.out.println(user.getId() + " - " + user.getName());
         }
     }
 

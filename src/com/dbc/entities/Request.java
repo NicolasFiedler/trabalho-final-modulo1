@@ -133,11 +133,14 @@ public class Request {
             }
         }
 
-        if (value > 0) {
-            this.setReachedValue(value);
-            this.donatesList.add(donate);
-            return true;
+        this.setReachedValue(value);
+        this.donatesList.add(donate);
+        if (this.checkIfGoalHasReached()) {
+            if (this.closeOrder()) {
+                return true;
+            }
         }
+
         return false;
     }
 
@@ -205,10 +208,12 @@ public class Request {
     @Override
     public String toString() {
         return this.getId() + " - " +
-                this.getTitle() + "\n-- Valor: " +
+                this.getTitle() + "\n" +
+                "Categoria: " + this.getCategory().getDescription() + "\n"
+                + "Valor: " +
                 this.getReachedValue() + "/" +
                 this.getGoal() + "\nDescrição: " +
                 this.getDescription() + "\nUsuário: " +
-                this.getOwner();
+                this.getOwner().getName() + "\n";
     }
 }

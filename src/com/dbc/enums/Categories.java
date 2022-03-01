@@ -22,4 +22,12 @@ public enum Categories {
     public String getDescription() {
         return this.description;
     }
+
+    public static void listCategories () {
+        int count = 1;
+        for (Categories cat:
+             Categories.values()) {
+            System.out.println(count++ + " - " + cat.getDescription());
+        }
+    }
 }

@@ -25,7 +25,6 @@ public class DonateTest {
             donate.setCpfDonator("6533");
             donate.setEmailDonator("ana@gmail");
             donate.setDonateValue(30.0);
-            donate.setAccoutInformation("akjhksnkj");
             String description = "SIM";
 
             var = true;

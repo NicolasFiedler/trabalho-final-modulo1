@@ -6,7 +6,7 @@ public class Donate {
     private String cpfDonator;
     private String emailDonator;
     private Double donateValue;
-    private String description, accoutInformation;
+    private String description;
 
     public Donate(){
 
@@ -18,37 +18,47 @@ public class Donate {
         this.setEmailDonator(emailDonator);
         this.setDonateValue(donateValue);
         this.setDescription(descripition);
-        this.setAccoutInformation(accoutInformation);
     }
 
     public Boolean createDonate() {
 
-       Scanner scanner = new Scanner(System.in);
-       Integer id= scanner.nextInt();
-       scanner.nextLine();
-       Double valor;
-
-        String payStatus = scanner.nextLine();
+         Scanner scanner = new Scanner(System.in);
+         Request.getAllRequests();
+         System.out.print("Informe o ID da vakinha para qual voce deseja doar -> ");
+         Integer id= scanner.nextInt();
+         scanner.nextLine();
+         if (new Request().getRequestById(id) == null){
+             return false;
+         }
+         Double valor;
+         System.out.println();
+        System.out.println("(Digitar 'válido' para validar pagamento)");
+         String payStatus = scanner.nextLine();
 
         if (BankAccount.simulatePayment(payStatus)) {
 
+            System.out.print("Informe o nome: ");
             this.setNameDonator(scanner.nextLine());
+            System.out.print("Informe o CPF: ");
             this.setCpfDonator(scanner.nextLine());
+            System.out.print("Informe o email: ");
             this.setEmailDonator(scanner.nextLine());
+            System.out.print("Informe o valor: ");
             valor=scanner.nextDouble();
             if(valor>0){
             this.setDonateValue(valor);
             } else {return false;}
             scanner.nextLine();
-            this.setAccoutInformation(scanner.nextLine());
+            System.out.println("Você gostaria de deixar uma mensagem? (Digite 'sim' ou 'nao')");
             String description = scanner.nextLine();
 
             if (description.equalsIgnoreCase("sim")) {
+                System.out.print("Digite sua mensagem: ");
                 this.setDescription(scanner.nextLine());
             } else {
-                this.setDescription(null);
+                this.setDescription("");
             }
-            Request request=new Request().getRequestById(id);
+            Request request = new Request().getRequestById(id);
             request.addNewDonate(this);
             return true;
         }
@@ -97,13 +107,5 @@ public class Donate {
 
     public void setDescription(String descripition) {
         this.description = descripition;
-    }
-
-    public String getAccoutInformation() {
-        return accoutInformation;
-    }
-
-    public void setAccoutInformation(String accoutInformation) {
-        this.accoutInformation = accoutInformation;
     }
 }
