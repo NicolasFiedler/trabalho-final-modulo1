@@ -135,6 +135,7 @@ public class Request {
 
         if (value > 0) {
             this.setReachedValue(value);
+            this.donatesList.add(donate);
             return true;
         }
         return false;
