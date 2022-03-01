@@ -26,7 +26,7 @@ public class Donate {
        Scanner scanner = new Scanner(System.in);
        Integer id= scanner.nextInt();
        scanner.nextLine();
-
+       Double valor;
 
         String payStatus = scanner.nextLine();
 
@@ -35,7 +35,10 @@ public class Donate {
             this.setNameDonator(scanner.nextLine());
             this.setCpfDonator(scanner.nextLine());
             this.setEmailDonator(scanner.nextLine());
-            this.setDonateValue(scanner.nextDouble());
+            valor=scanner.nextDouble();
+            if(valor>0){
+            this.setDonateValue(valor);
+            } else {return false;}
             scanner.nextLine();
             this.setAccoutInformation(scanner.nextLine());
             String description = scanner.nextLine();
