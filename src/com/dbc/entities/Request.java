@@ -25,15 +25,15 @@ public class Request {
     private Double reachedValue;
     private ArrayList<Donate> donatesList;
 
-    private ArrayList<Request> closedDonatesList;
-
     public static ArrayList<Request> requestsDB = new ArrayList<>();
+    public static ArrayList<Request> closedRequestList = new ArrayList<>();
+
     public static Integer idCount = 0;
 
     public Request() {}
 
     public Request(User owner, BankAccount bankAccount, Categories category, String title, String description, Double goal) {
-        this.setId(++idCount);
+        this.setId(idCount++);
         this.setOwner(owner);
         this.setBankAccount(bankAccount);
         this.setCategory(category);
@@ -42,7 +42,7 @@ public class Request {
         this.goal = goal;
         this.reachedValue = 0.0;
         this.donatesList = new ArrayList<>();
-        this.closedDonatesList = new ArrayList<>();
+        this.closedRequestList = new ArrayList<>();
 
         requestsDB.add(this);
     }
@@ -160,8 +160,8 @@ public class Request {
 
     public boolean closeOrder() {
         Request clone = this;
-        if (requestsDB.remove(this.getId())) {
-            this.closedDonatesList.add(clone);
+        if (requestsDB.remove(this)) {
+            closedRequestList.add(clone);
             return true;
         }
         return false;
@@ -209,6 +209,6 @@ public class Request {
                 this.getReachedValue() + "/" +
                 this.getGoal() + "\nDescrição: " +
                 this.getDescription() + "\nUsuário: " +
-                this.getOwner().getName();
+                this.getOwner();
     }
 }
