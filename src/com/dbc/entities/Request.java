@@ -3,11 +3,18 @@ package com.dbc.entities;
 
 import com.dbc.entities.user.User;
 import com.dbc.enums.Categories;
-import jdk.jfr.Category;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Request {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String num = sc.nextLine();
+
+        System.out.println(num);
+    }
 
     private Integer id;
     private User owner;
@@ -121,8 +128,9 @@ public class Request {
         Double value = donate.getDonateValue();
 
         if (this.checkIfGoalHasReached()) {
-            this.closeOrder();
-            return false;
+            if (this.closeOrder()) {
+                return false;
+            }
         }
 
         if (value > 0) {
@@ -138,7 +146,7 @@ public class Request {
 
     public static void getRequestsByCategory(Categories category) {
         requestsDB.stream()
-                .filter(request -> request.getCategory() == category)
+                .filter(request -> request.getCategory().equals(category))
                 .forEach(System.out::println);
     }
 
@@ -149,12 +157,15 @@ public class Request {
         return false;
     }
 
-    public void closeOrder() {
-        this.closedDonatesList.add(this);
-        requestsDB.remove(this.getId());
+    public boolean closeOrder() {
+        Request clone = this;
+        if (requestsDB.remove(this.getId())) {
+            this.closedDonatesList.add(clone);
+            return true;
+        }
+        return false;
     }
 
-    // TODO - tratar caso retorne nulo.
     public Request getRequestById(Integer id) {
         Request request = requestsDB.stream()
                 .filter(r -> r.getId() == id)
@@ -165,10 +176,29 @@ public class Request {
 
     public boolean addNewDonate(Donate donate) {
         if (donate != null) {
-            this.setNewDonate(donate);
-            return true;
+            if (this.setNewDonate(donate)) {
+                return true;
+            }
         }
         return false;
+    }
+
+    public void editRequest() {
+        Scanner scanner = new Scanner(System.in);
+        String title, description;
+
+        System.out.print("Digite o novo titulo: ");
+        title = scanner.nextLine();
+        System.out.print("Digite a nova descrição: ");
+        description = scanner.nextLine();
+
+        if (title != "" && title != " ") {
+            this.setTitle(title);
+        }
+
+        if (description != "" && description != " ") {
+            this.setDescription(description);
+        }
     }
 
     @Override
@@ -179,6 +209,5 @@ public class Request {
                 this.getGoal() + "\nDescrição: " +
                 this.getDescription() + "\nUsuário: " +
                 this.getOwner().getName();
-
     }
 }
