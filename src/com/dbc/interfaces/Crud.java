@@ -1,7 +1,7 @@
 package com.dbc.interfaces;
 
 public interface Crud {
-    void readUser (Integer id);
-    void updateUser (Integer id);
-    void deleteUser (Integer id);
+    Boolean createUser (String name, String email, String cpf);
+    Boolean updateUser (Integer id);
+    Boolean deleteUser (Integer id);
 }

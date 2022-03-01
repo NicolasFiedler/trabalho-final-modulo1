@@ -2,8 +2,6 @@ package com.dbc.entities.user;
 
 import com.dbc.entities.Request;
 import com.dbc.interfaces.Crud;
-
-import javax.sound.midi.Soundbank;
 import java.util.ArrayList;
 
 public abstract class User implements Crud {
@@ -81,11 +79,24 @@ public abstract class User implements Crud {
     }
 
     public static User getUserById (Integer id) {
-        for (User user :
-                getUserDB()) {
+        for (User user : getUserDB()) {
             if (user.getId().equals(id)){
                 return user;
             }
+        }
+        return null;
+    }
+
+    public Institution userToInstitution (Integer id) {
+        if (getUserById(id) instanceof Institution) {
+            return (Institution) getUserById(id);
+        }
+        return null;
+    }
+
+    public Person userToPerson(Integer id) {
+        if (getUserById(id) instanceof Institution) {
+            return (Person) getUserById(id);
         }
         return null;
     }
