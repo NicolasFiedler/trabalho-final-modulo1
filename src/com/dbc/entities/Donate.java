@@ -34,6 +34,7 @@ public class Donate {
          System.out.println();
         System.out.println("(Digitar 'válido' para validar pagamento)");
          String payStatus = scanner.nextLine();
+         clear();
 
         if (BankAccount.simulatePayment(payStatus)) {
 
@@ -107,5 +108,11 @@ public class Donate {
 
     public void setDescription(String descripition) {
         this.description = descripition;
+    }
+
+    public void clear () {
+        for (int i = 0; i < 50; i++) {
+            System.out.println();
+        }
     }
 }

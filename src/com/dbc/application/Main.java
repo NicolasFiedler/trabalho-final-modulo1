@@ -154,18 +154,18 @@ public class Main {
         request = new Request(
                 User.getUserById(0),
                 new BankAccount("999999-5", "0005"),
-                Categories.OUTROS,
-                "ME QUEBREI!",
-                "ANDEI DE BIKE E OLHA NO QUE DEU",
-                50000.);
+                Categories.ANIMAIS,
+                "Ajude um doguinho.",
+                "Melhore a vida de um animalzinho",
+                500.);
 
         request = new Request(
                 User.getUserById(0),
                 new BankAccount("999999-5", "0005"),
-                Categories.OUTROS,
-                "ME QUEBREI!",
-                "ANDEI DE BIKE E OLHA NO QUE DEU",
-                50000.);
+                Categories.SONHOS,
+                "Quero comprar uma bike nova",
+                "Após minha queda, minha bike ta meio detonada...",
+                3000.);
     }
 
     public static void userForm () {
