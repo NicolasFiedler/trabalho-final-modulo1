@@ -14,6 +14,8 @@ public class InstitutionTest {
         Institution institution = new Institution();
         institution.createUser("Name Institution", "email@email.com", "CNPJ");
         institution.createUser("Name Institution2", "email2@email.com", "CNPJ2");
+        Person person = new Person();
+        person.createUser("Name Person", "email@email.com", "CPF");
 
         User.listPrint();
 
