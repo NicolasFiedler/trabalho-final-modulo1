@@ -119,14 +119,9 @@ public class Request {
     public boolean setNewDonate(Donate donate) {
         Double value = donate.getDonateValue();
 
-        if (this.checkIfGoalHasReached()) {
-            if (this.closeOrder()) {
-                return false;
-            }
-        }
-
         this.setReachedValue(value);
         this.donatesList.add(donate);
+
         if (this.checkIfGoalHasReached()) {
             if (this.closeOrder()) {
                 return true;
