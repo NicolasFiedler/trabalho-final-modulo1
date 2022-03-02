@@ -150,22 +150,6 @@ public class Main {
                 "ME QUEBREI!",
                 "ANDEI DE BIKE E OLHA NO QUE DEU",
                 50000.);
-
-        request = new Request(
-                User.getUserById(0),
-                new BankAccount("999999-5", "0005"),
-                Categories.OUTROS,
-                "ME QUEBREI!",
-                "ANDEI DE BIKE E OLHA NO QUE DEU",
-                50000.);
-
-        request = new Request(
-                User.getUserById(0),
-                new BankAccount("999999-5", "0005"),
-                Categories.OUTROS,
-                "ME QUEBREI!",
-                "ANDEI DE BIKE E OLHA NO QUE DEU",
-                50000.);
     }
 
     public static void userForm () {
