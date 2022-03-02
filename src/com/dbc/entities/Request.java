@@ -35,7 +35,6 @@ public class Request {
         this.goal = goal;
         this.reachedValue = 0.0;
         this.donatesList = new ArrayList<>();
-        this.closedRequestList = new ArrayList<>();
 
         requestsDB.add(this);
     }

@@ -1,5 +1,7 @@
 package com.dbc.entities.user;
 
+import com.dbc.entities.Request;
+
 import java.util.Scanner;
 
 public class Institution extends User {
@@ -74,6 +76,7 @@ public class Institution extends User {
     @Override
     public Boolean deleteUser() {
         if (this != null) {
+            Request.requestsDB.removeIf(request -> request.getOwner().equals(this));
             User.getUserDB().remove(this);
             return true;
         }

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public abstract class User implements Crud {
     private Integer id;
     private String name, email;
-    private ArrayList<Request> myRequestsList;
+    private ArrayList<Request> myRequestsList = new ArrayList<>();
 
     private static ArrayList<User> userDB = new ArrayList<>();
     private static Integer count = 0;
@@ -25,8 +25,8 @@ public abstract class User implements Crud {
         return myRequestsList;
     }
 
-    public void setMyRequestsList(ArrayList<Request> myRequestsList) {
-        this.myRequestsList = myRequestsList;
+    public void setMyRequestsList(Request request) {
+        this.myRequestsList.add(request);
     }
 
     public Integer getId() {
